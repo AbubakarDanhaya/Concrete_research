@@ -1,33 +1,34 @@
-# 📊 Improving Machine Learning Prediction of Concrete Compressive Strength Using Engineering-Based Feature Design
+# 🧪 Improving Machine Learning Prediction of Concrete Compressive Strength Using Engineering-Based Feature Design
 
 ## 📌 Overview
 
-This repository presents a research-driven approach to improving the prediction of concrete compressive strength using machine learning, enhanced by **engineering-informed feature design**.
+This repository presents a machine learning framework for predicting the compressive strength of concrete by integrating **engineering-informed feature design** with data-driven modeling.
 
-Unlike conventional data-driven approaches, this work integrates **civil engineering domain knowledge** into feature engineering to improve model accuracy, interpretability, and physical relevance.
+Unlike conventional approaches that rely solely on raw input variables, this study introduces **physically meaningful engineered features**—such as water–cement ratio and binder content—to enhance both predictive performance and interpretability.
+
+The results demonstrate that incorporating engineering knowledge into feature design significantly improves model accuracy and aligns predictions with established concrete mechanics principles.
 
 ---
 
-## 🎯 Research Objective
+## 🎯 Objectives
 
-The primary goal of this study is to:
-
-> Investigate how engineering-based feature design (e.g., water–cement ratio, binder content) improves the predictive performance of machine learning models for concrete compressive strength.
+* Develop robust machine learning models for predicting concrete compressive strength
+* Introduce **engineering-based features** to improve model performance
+* Compare raw and engineered feature sets systematically
+* Provide **interpretable insights** using SHAP (Shapley Additive Explanations)
+* Bridge the gap between **data-driven modeling and engineering understanding**
 
 ---
 
 ## 📂 Dataset
 
 * Source: UCI Machine Learning Repository
-* Dataset: **Concrete Compressive Strength Dataset**
+* Dataset: Concrete Compressive Strength
+* Samples: 1030
+* Input Variables: 8
+* Output Variable: Compressive Strength (MPa)
 
-### 📊 Dataset Description
-
-* **Total Samples:** 1030
-* **Input Variables:** 8
-* **Target Variable:** Compressive Strength (MPa)
-
-#### Input Features:
+### Input Features
 
 * Cement
 * Blast Furnace Slag
@@ -44,144 +45,99 @@ The primary goal of this study is to:
 
 ### 1. Data Preprocessing
 
-* Data inspection:
-
-  * Missing values
-  * Duplicate records
-  * Data types
-
-* Outlier detection:
-
-  * Interquartile Range (IQR)
-
-Two datasets were created:
-
-* **Dataset A:** With outliers
-
-* **Dataset B:** Without outliers
-
-* Feature scaling:
-
-  * StandardScaler / MinMaxScaler (for linear models)
+* Data inspection and cleaning
+* Duplicate removal
+* Outlier detection using IQR
+* Optional dataset variation (with/without outliers)
+* Feature scaling (for linear models)
 
 ---
 
 ### 2. Engineering-Based Feature Design (Core Contribution)
 
-New features were generated using domain knowledge:
+The following features were derived based on concrete mix design principles:
 
 * **Water–Cement Ratio (w/c)**
 * **Binder Content** = Cement + Slag + Fly Ash
 * **Water–Binder Ratio (w/b)**
-* **Aggregate Ratio (AR)**
+* **Aggregate Ratio**
 
-Two feature sets were used:
+Two datasets were created:
 
-* **Raw Features**
-* **Enhanced Features (Raw + Engineered)**
-
----
-
-### 3. Data Splitting
-
-* Train/Test Split:
-
-  * 80% Training
-  * 20% Testing
-
-* Reproducibility:
-
-  * `random_state = 42`
-
-* Optional:
-
-  * 5-Fold Cross Validation
+* Raw feature set
+* Enhanced feature set (raw + engineered features)
 
 ---
 
-### 4. Machine Learning Models
+### 3. Model Development
 
 The following models were implemented:
 
-* Linear Regression (Baseline)
+* Linear Regression (baseline)
 * Random Forest Regressor
 * XGBoost Regressor
 
 ---
 
-### 5. Hyperparameter Tuning
-
-* Methods:
-
-  * GridSearchCV
-  * RandomizedSearchCV
-
-* Cross-validation:
-
-  * 5-Fold CV
-
----
-
-### 6. Model Evaluation Metrics
+### 4. Model Evaluation
 
 Models were evaluated using:
 
-* **R² Score**
-* **RMSE (Root Mean Squared Error)**
-* **MAE (Mean Absolute Error)**
+* R² (Coefficient of Determination)
+* RMSE (Root Mean Square Error)
+* MAE (Mean Absolute Error)
+
+Additionally, **predicted vs experimental plots** with ±20% deviation bounds were used for visual assessment.
 
 ---
 
-### 7. Model Interpretability
+### 5. Model Interpretability
 
-To ensure transparency and physical relevance:
+SHAP (SHapley Additive exPlanations) was used to:
 
-* SHAP (Shapley Additive Explanations) was used to:
-
-  * Identify key influencing features
-  * Validate engineering significance
-
----
-
-### 8. Visualization
-
-The following visualizations were generated:
-
-* Predicted vs Actual plots
-* Feature importance plots
-* SHAP summary plots
-* Model comparison charts
+* Identify key influencing features
+* Analyze feature impact direction
+* Validate engineering consistency of predictions
 
 ---
 
-## 📈 Results
+## 📊 Key Results
 
-The study demonstrates that:
+* Engineered features significantly improved model performance
 
-* Engineering-based features significantly improve model performance
-* The **water–cement ratio** is consistently the most influential parameter
-* Enhanced feature sets outperform raw features across all models
+* Models trained on enhanced features showed:
+
+  * Higher R² values
+  * Lower RMSE and MAE
+  * Reduced prediction scatter
+
+* SHAP analysis confirmed:
+
+  * Water–cement ratio as the most influential feature
+  * Binder content positively contributes to strength
+  * Strong alignment with concrete mechanics theory
+
+---
+
+## 📈 Visualization
+
+The repository includes:
+
+* Predicted vs Experimental plots (Raw vs Engineered)
+* SHAP Summary plots
+* SHAP Feature Importance (bar plots)
+* SHAP Dependence plots
+* Waterfall plots (local interpretability)
 
 ---
 
 ## 🧠 Key Insight
 
-> This research emphasizes that integrating **engineering knowledge with machine learning** leads to more accurate, interpretable, and reliable models.
+This work demonstrates that:
+
+> Incorporating **engineering knowledge into feature design** not only improves predictive accuracy but also enhances the interpretability of machine learning models.
 
 ---
-
-## 🛠️ Technologies Used
-
-* Python
-* Scikit-learn
-* XGBoost
-* Pandas
-* NumPy
-* Matplotlib / Seaborn
-* SHAP
-
----
-
 ## 📁 Repository Structure
 
 ```
@@ -191,7 +147,7 @@ The study demonstrates that:
 ├── results/
 ├── README.md
 
-
+```
 ---
 
 ## 👨‍🔬 Authors
@@ -205,17 +161,32 @@ The study demonstrates that:
 
 ---
 
-## 📌 Future Work
+## 📦 Requirements
 
-* Integration with FEM-based simulation data
-* Physics-informed machine learning models
-* Extension to durability and long-term performance prediction
-
----
-
-## ⭐ Final Note
-
-This project bridges the gap between **data-driven models** and **engineering principles**, providing a more meaningful and practical approach to predictive modeling in civil engineering.
+* Python 3.8+
+* NumPy
+* Pandas
+* Scikit-learn
+* XGBoost
+* SHAP
+* Matplotlib
 
 ---
 
+## 🔍 Reproducibility
+
+* Fixed random seed used (`random_state=100`)
+* All preprocessing steps documented
+* SHAP values saved for consistency
+
+---
+
+## 📚 Future Work
+
+* Integration with physics-based models (FEM simulations)
+* Application to structural health monitoring
+* Extension to deep learning frameworks
+* Hybrid physics-informed ML approaches
+
+---
+# **Thank You**
