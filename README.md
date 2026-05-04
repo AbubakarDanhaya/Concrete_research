@@ -1,168 +1,97 @@
-# Predicting Concrete Compressive Strength Using Machine Learning
+# 🧱 Concrete Research — Machine Learning for Compressive Strength Prediction
 
 ## 📌 Overview
 
-This repository contains the methodology, experiments, and analysis for a research study focused on predicting the **compressive strength of concrete** using multiple **machine learning (ML) models**. The study adopts a **data-driven approach**, enhanced with **ensemble learning** and **model interpretability techniques**, to achieve robust and explainable predictions.
+This repository contains a structured set of research studies on **predicting concrete compressive strength using machine learning techniques integrated with civil engineering domain knowledge**.
+
+The work progresses from **pure data-driven modeling** to **engineering-informed feature engineering**, with a strong focus on **model accuracy, generalization, and interpretability**.
 
 ---
 
-## 🎯 Objectives
+## 🎯 Research Objective
 
-* Develop accurate machine learning models for predicting concrete compressive strength
-* Compare the performance of individual and ensemble ML algorithms
-* Improve prediction accuracy through hyperparameter optimization and ensemble learning
-* Interpret model behavior using explainable AI techniques (SHAP and Partial Dependence Display)
+To develop reliable and interpretable machine learning models for concrete compressive strength prediction by:
 
----
-
-## 📂 Dataset Description
-
-* **Source**: UCI Machine Learning Repository
-* **Contributor**: Prof. I-Cheng Yeh
-* **Total Samples**: 1030
-* **Number of Features**: 9
-
-### Input Features
-
-| Feature            | Unit  |
-| ------------------ | ----- |
-| Cement             | kg/m³ |
-| Blast Furnace Slag | kg/m³ |
-| Fly Ash            | kg/m³ |
-| Water              | kg/m³ |
-| Superplasticizer   | kg/m³ |
-| Coarse Aggregate   | kg/m³ |
-| Fine Aggregate     | kg/m³ |
-| Age                | days  |
-
-### Target Variable
-
-* **Concrete Compressive Strength** (MPa)
+* Evaluating advanced regression and ensemble learning models
+* Incorporating engineering-based feature design
+* Enhancing interpretability using explainable AI (SHAP)
+* Bridging data-driven methods with concrete mechanics principles
 
 ---
 
-## 🧹 Data Preprocessing
+## 📂 Repository Structure
 
-The dataset underwent comprehensive quality checks and cleaning steps:
+Each subfolder represents an independent research study:
 
-* **Missing Values**: None detected
-* **Duplicate Records**: 25 duplicate samples identified and removed
-* **Outlier Detection**:
+* **Project 1:** Data-driven ML modeling and ensemble learning
+* **Project 2:** Engineering-based feature engineering and physics-informed ML improvement
 
-  * Method: Interquartile Range (IQR)
-  * Outliers Identified: 94
-  * Action: Excluded to minimize undue influence on model training
+Each project includes its own:
 
-These preprocessing steps enhanced dataset reliability and reduced model bias.
-
----
-
-## 🔀 Data Splitting
-
-* **Training Set**: 80%
-* **Testing Set**: 20%
-* **Random State**: 100 (for reproducibility)
+* Methodology
+* Code implementation
+* Results and analysis
+* Documentation
 
 ---
 
-## ⚙️ Model Development
+## 📊 Dataset
 
-### Machine Learning Algorithms
-
-Seven models were evaluated:
-
-#### Individual Models
-
-* AdaBoost
-* Random Forest
-* XGBoost
-* LightGBM
-* CatBoost
-
-#### Ensemble Models
-
-* **Voting Regressor**
-
-  * Base Models: XGBoost, LightGBM, CatBoost
-
-* **Stacking Regressor**
-
-  * Base Models: XGBoost, CatBoost, Random Forest
-  * Meta-Learner: RidgeCV
-
-Ensemble models were constructed using the best-performing individual models after tuning.
+* Source: UCI Machine Learning Repository
+* Dataset: Concrete Compressive Strength
+* Samples: 1030
+* Input variables: Concrete mix proportions
+* Output: Compressive strength (MPa)
 
 ---
 
-## 🔧 Hyperparameter Optimization
+## ⚙️ Methodology Summary
 
-* **Technique**: RandomizedSearchCV
-* **Cross-Validation**: 10-fold
-* **Optimization Scope**: Training dataset only
+Across both studies, the workflow includes:
 
-This process identified optimal model configurations while preventing data leakage.
-
----
-
-## 📊 Model Evaluation
-
-Models were evaluated on the unseen test dataset using appropriate regression performance metrics (e.g., RMSE, MAE, R²).
+* Data preprocessing and outlier handling
+* Feature scaling and engineering
+* Machine learning model development (RF, XGBoost, LightGBM, CatBoost, etc.)
+* Ensemble learning (Voting and Stacking models)
+* Hyperparameter optimization
+* Model evaluation (R², RMSE, MAE)
+* Explainable AI analysis (SHAP, PDP)
 
 ---
 
-## 🔍 Model Interpretability
+## 🧠 Key Contributions
 
-To enhance transparency and trust in the predictions, the following explainability techniques were employed:
+* Development of high-performing ML models for concrete strength prediction
+* Demonstration of improved performance using **engineering-informed feature design**
+* Systematic comparison between raw and engineered feature spaces
+* Integration of **explainable AI for model transparency**
+* Establishment of a framework linking **machine learning and concrete mechanics**
 
-* **SHAP (SHapley Additive exPlanations)**
+---
 
-  * Quantifies feature contributions at global and local levels
+## 📈 Key Insight
 
-* **Partial Dependence Display (PDP)**
-
-  * Visualizes the marginal effect of selected features on compressive strength
-
-These methods provide insights into how input variables influence model predictions.
+The results show that **engineering-based feature engineering significantly improves both predictive accuracy and physical interpretability of machine learning models**, reinforcing the value of domain knowledge in data-driven civil engineering applications.
 
 ---
 
 ## 🛠 Tools & Technologies
 
-* **Programming Language**: Python
-* **Libraries**:
-
-  * Scikit-learn
-  * XGBoost
-  * LightGBM
-  * CatBoost
-  * SHAP
-  * NumPy, Pandas, Matplotlib, Seaborn
+Python, Scikit-learn, XGBoost, LightGBM, CatBoost, SHAP, Pandas, NumPy, Matplotlib
 
 ---
 
-## 📈 Key Contributions
-
-* Comprehensive comparison of individual and ensemble ML models
-* Improved prediction accuracy through ensemble learning
-* Integration of explainable AI for model interpretability
-* Reproducible and well-structured ML workflow
-
----
-
-## 📚 Reference
-
-[1] Yeh, I.-C. (1998). *Modeling of strength of high-performance concrete using artificial neural networks*. Cement and Concrete Research.
-
----
-
-## ✍️ Author
+## 👨‍🔬 Author
 
 **Abubakar Muhammad Danhaya**
 Civil Engineer | Machine Learning Researcher
-Structural Health Monitoring & Data-Driven Modeling
+Focus: Structural Health Monitoring & Data-Driven Infrastructure Systems
 
 ---
 
-## 📄 License
+## 📄 Note
 
-This project is intended for **academic and research purposes**. Please cite appropriately if used.
+This repository is part of an ongoing research series exploring **physics-informed and interpretable machine learning for civil engineering applications**.
+
+---
+
