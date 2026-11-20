@@ -1,168 +1,88 @@
-# Predicting Concrete Compressive Strength Using Machine Learning
+# Explainable Ensemble Learning for Concrete Compressive Strength Prediction Using Optimized Tree-Based Models
 
-## 📌 Overview
+# Concrete Compressive Strength Prediction
 
-This repository contains the methodology, experiments, and analysis for a research study focused on predicting the **compressive strength of concrete** using multiple **machine learning (ML) models**. The study adopts a **data-driven approach**, enhanced with **ensemble learning** and **model interpretability techniques**, to achieve robust and explainable predictions.
+## Overview
+This project develops and evaluates machine learning models for predicting the compressive strength of concrete using its mix proportions and curing age. It also applies explainable AI techniques to understand how different input variables influence model predictions.
 
----
+## Methodology
 
-## 🎯 Objectives
+### 1. Data Collection and Preprocessing
+The concrete dataset was loaded using Pandas. The following preprocessing steps were performed:
 
-* Develop accurate machine learning models for predicting concrete compressive strength
-* Compare the performance of individual and ensemble ML algorithms
-* Improve prediction accuracy through hyperparameter optimization and ensemble learning
-* Interpret model behavior using explainable AI techniques (SHAP and Partial Dependence Display)
+- Checked for missing values.
+- Identified and removed duplicate records.
+- Detected outliers using boxplots.
+- Removed outliers using the Interquartile Range (IQR) method, with thresholds of 1.5 × IQR.
+- Created an additional feature: water-to-cement ratio.
 
----
+### 2. Exploratory Data Analysis (EDA)
+Exploratory data analysis was conducted to understand the dataset and relationships between variables.
 
-## 📂 Dataset Description
+The analysis included:
+- Descriptive statistical analysis.
+- Feature distribution analysis using histograms.
+- Correlation analysis.
+- Correlation heatmap visualization.
 
-* **Source**: UCI Machine Learning Repository
-* **Contributor**: Prof. I-Cheng Yeh
-* **Total Samples**: 1030
-* **Number of Features**: 9
+### 3. Model Development
+The dataset was divided into training (80%) and testing (20%) subsets using a fixed random state of 100.
 
-### Input Features
+Five individual machine learning models were developed:
 
-| Feature            | Unit  |
-| ------------------ | ----- |
-| Cement             | kg/m³ |
-| Blast Furnace Slag | kg/m³ |
-| Fly Ash            | kg/m³ |
-| Water              | kg/m³ |
-| Superplasticizer   | kg/m³ |
-| Coarse Aggregate   | kg/m³ |
-| Fine Aggregate     | kg/m³ |
-| Age                | days  |
+1. AdaBoost Regressor
+2. Random Forest Regressor
+3. XGBoost Regressor
+4. LightGBM Regressor
+5. CatBoost Regressor
 
-### Target Variable
+Hyperparameter optimization was performed using `RandomizedSearchCV` with 10-fold cross-validation.
 
-* **Concrete Compressive Strength** (MPa)
+Two ensemble learning approaches were also developed:
 
----
+- **Voting Regressor:** Combines predictions from XGBoost, LightGBM, and CatBoost through averaging.
+- **Stacking Regressor:** Combines Random Forest, XGBoost, and CatBoost predictions using RidgeCV as the final estimator.
 
-## 🧹 Data Preprocessing
+### 4. Model Evaluation
+Model performance was evaluated using the following metrics:
 
-The dataset underwent comprehensive quality checks and cleaning steps:
+- **R²:** Measures the proportion of variance in concrete compressive strength explained by the model.
+- **RMSE:** Measures the square root of the average squared prediction errors.
+- **MAE:** Measures the average absolute prediction error.
+- **Within ±20%:** Measures the percentage of predictions falling within ±20% of experimental values.
 
-* **Missing Values**: None detected
-* **Duplicate Records**: 25 duplicate samples identified and removed
-* **Outlier Detection**:
+Model performance was further examined using:
 
-  * Method: Interquartile Range (IQR)
-  * Outliers Identified: 94
-  * Action: Excluded to minimize undue influence on model training
+- Experimental versus predicted strength plots.
+- Residual distribution plots.
 
-These preprocessing steps enhanced dataset reliability and reduced model bias.
+### 5. Model Explainability
+Explainable AI techniques were applied to understand model behaviour and feature contributions.
 
----
+The following methods were used:
 
-## 🔀 Data Splitting
+- **SHAP (SHapley Additive exPlanations):** Evaluates the contribution and importance of input features to model predictions.
+- **SHAP Summary Plot:** Shows the overall distribution and influence of feature contributions.
+- **Partial Dependence Plots (PDP):** Examine the average relationship between individual input features and predicted compressive strength.
 
-* **Training Set**: 80%
-* **Testing Set**: 20%
-* **Random State**: 100 (for reproducibility)
+## Tools and Libraries
 
----
+- Python
+- Pandas and NumPy
+- Matplotlib and Seaborn
+- Scikit-learn
+- XGBoost
+- LightGBM
+- CatBoost
+- SHAP
+- SciPy
 
-## ⚙️ Model Development
+## Workflow Summary
 
-### Machine Learning Algorithms
+The overall research workflow follows these stages:
 
-Seven models were evaluated:
+**Data Collection → Data Preprocessing → Exploratory Data Analysis → Feature Engineering → Model Development → Hyperparameter Optimization → Ensemble Learning → Model Evaluation → Explainability**
 
-#### Individual Models
+## Objective
 
-* AdaBoost
-* Random Forest
-* XGBoost
-* LightGBM
-* CatBoost
-
-#### Ensemble Models
-
-* **Voting Regressor**
-
-  * Base Models: XGBoost, LightGBM, CatBoost
-
-* **Stacking Regressor**
-
-  * Base Models: XGBoost, CatBoost, Random Forest
-  * Meta-Learner: RidgeCV
-
-Ensemble models were constructed using the best-performing individual models after tuning.
-
----
-
-## 🔧 Hyperparameter Optimization
-
-* **Technique**: RandomizedSearchCV
-* **Cross-Validation**: 10-fold
-* **Optimization Scope**: Training dataset only
-
-This process identified optimal model configurations while preventing data leakage.
-
----
-
-## 📊 Model Evaluation
-
-Models were evaluated on the unseen test dataset using appropriate regression performance metrics (e.g., RMSE, MAE, R²).
-
----
-
-## 🔍 Model Interpretability
-
-To enhance transparency and trust in the predictions, the following explainability techniques were employed:
-
-* **SHAP (SHapley Additive exPlanations)**
-
-  * Quantifies feature contributions at global and local levels
-
-* **Partial Dependence Display (PDP)**
-
-  * Visualizes the marginal effect of selected features on compressive strength
-
-These methods provide insights into how input variables influence model predictions.
-
----
-
-## 🛠 Tools & Technologies
-
-* **Programming Language**: Python
-* **Libraries**:
-
-  * Scikit-learn
-  * XGBoost
-  * LightGBM
-  * CatBoost
-  * SHAP
-  * NumPy, Pandas, Matplotlib, Seaborn
-
----
-
-## 📈 Key Contributions
-
-* Comprehensive comparison of individual and ensemble ML models
-* Improved prediction accuracy through ensemble learning
-* Integration of explainable AI for model interpretability
-* Reproducible and well-structured ML workflow
-
----
-
-## 📚 Reference
-
-[1] Yeh, I.-C. (1998). *Modeling of strength of high-performance concrete using artificial neural networks*. Cement and Concrete Research.
-
----
-
-## ✍️ Author
-
-**Abubakar Muhammad Danhaya**
-Civil Engineer | Machine Learning Researcher
-Structural Health Monitoring & Data-Driven Modeling
-
----
-
-## 📄 License
-
-This project is intended for **academic and research purposes**. Please cite appropriately if used.
+The main objective is to develop reliable machine learning models for predicting concrete compressive strength and use explainable AI techniques to improve the interpretability of the predictions.
